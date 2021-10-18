@@ -16,16 +16,14 @@ def get_release_info(org: str, repo: str, tag: str):
 def build_md(title, tag, repo, body) -> str:
     date = datetime.datetime.now().strftime("%Y-%m-%d")
 
-    md = f"""
-        ---
-            title: {title}
-            date: {date}
-            layout: news
-            release_number: {tag}
-            release_type: {repo}
-        ---
-        {body}
-    """
+    md = "---\n" + \
+        f"   title: {title}\n" + \
+        f"   date: {date}\n" + \
+        "   layout: news\n" + \
+        f"   release_number: {tag}\n" + \
+        f"   release_type: {repo}\n" + \
+        "---\n" + \
+        f"{body}"
 
     return md
 
@@ -34,18 +32,18 @@ def main():
     """
     Build the md page for the release
     """
-    print(sys.argv[1].split("/"))
+
     org, repo = sys.argv[1].split("/")
     tag = sys.argv[2]
 
-    release_info = get_release_info(tag)
+    release_info = get_release_info(org, repo, tag)
 
     title = release_info['name']
     body = release_info['body']
 
     md = build_md(title, tag, repo, body)
 
-    with open(f"./{slugify(title)}.md") as fp:
+    with open(f"./{slugify(title)}.md", "w") as fp:
         fp.write(md)
 
 

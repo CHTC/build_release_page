@@ -3,6 +3,7 @@ import datetime
 import sys
 from slugify import slugify
 
+
 def get_release_info(org: str, repo: str, tag: str):
 
     release_info_result = requests.request("GET", f"https://api.github.com/repos/{org}/{repo}/releases/tags/{tag}")
@@ -10,6 +11,7 @@ def get_release_info(org: str, repo: str, tag: str):
     release_info = release_info_result.json()
 
     return release_info
+
 
 def build_md(title, tag, repo, body) -> str:
     date = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -26,6 +28,7 @@ def build_md(title, tag, repo, body) -> str:
     """
 
     return md
+
 
 def main():
     """

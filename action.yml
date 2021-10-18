@@ -2,9 +2,6 @@ name: Build Release Page
 description: Creates a md page that contains the release information of a Github release
 
 inputs:
-  organization:
-    required: true
-    description: The Organization that hosts the Repo that holds the Release
   repository:
     required: true
     description: The Repository that holds the Release
@@ -23,5 +20,5 @@ runs:
     - shell: bash
       run: |
         pip3 install -r ${{ github.action_path }}/requirements.txt
-        python3 ${{ github.action_path }}/build_release_page.py ${{ inputs.organization }} ${{ inputs.repository }} ${{ inputs.release }}
+        python3 ${{ github.action_path }}/build_release_page.py ${{ inputs.repository }} ${{ inputs.release }}
 

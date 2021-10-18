@@ -32,7 +32,8 @@ def main():
     Build the md page for the release
     """
 
-    org, repo, tag = sys.argv[1:3]
+    org, repo = sys.argv[1].split("/")
+    tag = sys.argv[2]
 
     release_info = get_release_info(tag)
 

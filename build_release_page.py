@@ -34,7 +34,7 @@ def main():
     """
     Build the md page for the release
     """
-
+    print(sys.argv[1].split("/"))
     org, repo = sys.argv[1].split("/")
     tag = sys.argv[2]
 

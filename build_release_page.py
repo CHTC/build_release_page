@@ -1,6 +1,8 @@
 import requests
 import datetime
 import sys
+from dateutil import parser
+import datetime
 
 
 def get_release_info(org: str, repo: str, tag: str):
@@ -12,8 +14,7 @@ def get_release_info(org: str, repo: str, tag: str):
     return release_info
 
 
-def build_md(title, tag, repo, body) -> str:
-    date = datetime.datetime.now().strftime("%Y-%m-%d")
+def build_md(title, date, tag, repo, body) -> str:
 
     md = "---\n" + \
         f"   title: {title}\n" + \
@@ -39,8 +40,9 @@ def main():
 
     title = release_info['name']
     body = release_info['body']
+    date = parser.isoparse(release_info['published_at']).strftime("%Y-%m-%d")
 
-    md = build_md(title, tag, repo, body)
+    md = build_md(title, date, tag, repo, body)
 
     with open(f"./{tag}.md", "w") as fp:
         fp.write(md)

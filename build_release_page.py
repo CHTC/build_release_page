@@ -36,7 +36,7 @@ def main():
     tag = sys.argv[2]
 
     release_info = get_release_info(org, repo, tag)
-
+    print(release_info)
     title = release_info['name']
     body = release_info['body']
     date = parser.isoparse(release_info['published_at']).strftime("%Y-%m-%d")

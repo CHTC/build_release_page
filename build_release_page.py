@@ -1,5 +1,4 @@
 import requests
-import datetime
 import sys
 from dateutil import parser
 import datetime

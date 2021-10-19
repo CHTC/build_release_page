@@ -1,7 +1,6 @@
 import requests
 import datetime
 import sys
-from slugify import slugify
 
 
 def get_release_info(org: str, repo: str, tag: str):
@@ -43,7 +42,7 @@ def main():
 
     md = build_md(title, tag, repo, body)
 
-    with open(f"./{slugify(title)}.md", "w") as fp:
+    with open(f"./{tag}.md", "w") as fp:
         fp.write(md)
 
 

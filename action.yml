@@ -5,7 +5,7 @@ inputs:
   repository:
     required: true
     description: The Repository that holds the Release
-  release:
+  tag_name:
     required: true
     description: The tag name of the release
 
@@ -20,5 +20,5 @@ runs:
     - shell: bash
       run: |
         pip3 install -r ${{ github.action_path }}/requirements.txt
-        python3 ${{ github.action_path }}/build_release_page.py ${{ inputs.repository }} ${{ inputs.release }}
+        python3 ${{ github.action_path }}/build_release_page.py ${{ inputs.repository }} ${{ inputs.tag_name }}
 

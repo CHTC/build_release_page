@@ -65,11 +65,11 @@ def build_md(title, date, tag, repo, body) -> str:
     version_history_url = get_version_history_url(x, y, z)
 
     md = "---\n" + \
-        f"\ttitle: {title}\n" + \
-        f"\tdate: {date}\n" + \
-        "\tlayout: news\n" + \
-        f"\trelease_number: {tag}\n" + \
-        f"\trelease_type: {repo}\n" + \
+        f"title: {title}\n" + \
+        f"date: {date}\n" + \
+        "layout: news\n" + \
+        f"release_number: {tag}\n" + \
+        f"release_type: {repo}\n" + \
         "---" \
         "\n" \
         f"The HTCondor team is pleased to announce the release of HTCondor {x}.{y}.{z}." \

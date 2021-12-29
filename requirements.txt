@@ -3,6 +3,7 @@ charset-normalizer==2.0.7
 idna==3.3
 python-dateutil==2.8.2
 python-slugify==5.0.2
+PyYAML==6.0
 requests==2.26.0
 six==1.16.0
 text-unidecode==1.3

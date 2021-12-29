@@ -8,6 +8,8 @@ def get_github_release_info(org: str, repo: str, tag: str):
     """
     Uses the github api to grab the information about the new release.
 
+    https://docs.github.com/en/rest/reference/releases
+
     :param org: The org that owns the repo
     :param repo: The repo that the release was made in
     :param tag: The tag attached to the release

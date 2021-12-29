@@ -4,7 +4,15 @@ from dateutil import parser
 import yaml
 
 
-def get_release_info(org: str, repo: str, tag: str):
+def get_github_release_info(org: str, repo: str, tag: str):
+    """
+    Uses the github api to grab the information about the new release.
+
+    :param org: The org that owns the repo
+    :param repo: The repo that the release was made in
+    :param tag: The tag attached to the release
+    :return: A dictionary of information about the release
+    """
 
     release_info_result = requests.request("GET", f"https://api.github.com/repos/{org}/{repo}/releases/tags/{tag}")
 
@@ -12,25 +20,44 @@ def get_release_info(org: str, repo: str, tag: str):
 
     return release_info
 
-def main():
+def read_input():
     """
-    Build the md page for the release
+    Reads the input which is has expected form 'org/repo tag'
+
+    :return: The values split into the appropriate components
     """
 
     org, repo = sys.argv[1].split("/")
     tag = sys.argv[2]
 
-    release_info = get_release_info(org, repo, tag)
+    return org, repo, tag
+
+def main():
+    """
+    Build the yml release file
+    """
+
+    # Read in the input
+    org, repo, tag = read_input()
+
+    # Use the API to get the missing information
+    release_info = get_github_release_info(org, repo, tag)
+
+    # Build the release info dictionary to be dumped
     title = release_info['name']
     content = release_info['body']
     date = parser.isoparse(release_info['published_at']).strftime("%Y-%m-%d")
+    release_number = tag[1:]  # Assumes tag is of form 'V#.#.#'
 
-    release = {"title": title, "date": date, "content": content, "release_number": tag, "release_type": repo}
+    release = {"title": title, "date": date, "content": content, "release_number": release_number, "release_type": repo}
 
+    # Get the dictionary as a yaml file
     file = yaml.dump(release)
 
+    # Drop the file at root
     with open(f"./{repo}-{tag}.yml", "w") as fp:
         fp.write(file)
+
 
 if __name__ == '__main__':
     main()

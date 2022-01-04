@@ -49,7 +49,7 @@ def main():
     title = release_info['name']
     content = release_info['body']
     date = parser.isoparse(release_info['published_at']).strftime("%Y-%m-%d")
-    release_number = tag[1:]  # Assumes tag is of form 'V#.#.#'
+    release_number = tag[1:].replace("_", ".")  # Assumes tag is of form 'V#_#_#'
 
     release = {"title": title, "date": date, "content": content, "release_number": release_number, "release_type": repo}
 

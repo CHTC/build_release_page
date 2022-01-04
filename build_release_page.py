@@ -50,8 +50,10 @@ def main():
     content = release_info['body']
     date = parser.isoparse(release_info['published_at']).strftime("%Y-%m-%d")
     release_number = tag[1:].replace("_", ".")  # Assumes tag is of form 'V#_#_#'
+    sort_key = ".".join(x.zfill(2) for x in release_number.split("."))
 
-    release = {"title": title, "date": date, "content": content, "release_number": release_number, "release_type": repo}
+    release = {"title": title, "date": date, "content": content, "release_number": release_number, "release_type": repo,
+               "sort_key": sort_key}
 
     # Get the dictionary as a yaml file
     file = yaml.dump(release)

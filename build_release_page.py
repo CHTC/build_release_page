@@ -58,6 +58,8 @@ def main():
     # Get the dictionary as a yaml file
     file = yaml.dump(release)
 
+    print("\n", file, "\n")
+
     # Drop the file at root
     with open(f"./{repo}-{tag}.yml", "w") as fp:
         fp.write(file)

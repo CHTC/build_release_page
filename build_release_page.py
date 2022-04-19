@@ -61,7 +61,7 @@ def main():
     print("\n", file, "\n")
 
     # Drop the file at root
-    with open(f"./{repo}-{tag}.yml", "w") as fp:
+    with open(f"./{repo}-{release_number}.yml", "w") as fp:
         fp.write(file)
 
 
